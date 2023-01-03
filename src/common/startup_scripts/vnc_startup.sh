@@ -234,11 +234,11 @@ chmod 600 $PASSWD_PATH
 # start processes
 start_kasmvnc
 start_window_manager
-start_audio_out_websocket
-start_audio_out
-start_audio_in
+# start_audio_out_websocket
+# start_audio_out
+# start_audio_in
 start_upload
-start_gamepad
+# start_gamepad
 
 STARTUP_COMPLETE=1
 
