@@ -130,8 +130,9 @@ RUN chmod +x /etc/squid/start_squid.sh && chmod 4755 /etc/squid/start_squid.sh
 COPY ./src/common/scripts/kasm_hook_scripts $STARTUPDIR
 ADD ./src/common/startup_scripts $STARTUPDIR
 RUN bash $STARTUPDIR/set_user_permission.sh $STARTUPDIR $HOME && \
-    echo 'source $STARTUPDIR/generate_container_user' >> $HOME/.bashrc \
-    echo 'export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"' >> $HOME/.bashrc
+    echo 'source $STARTUPDIR/generate_container_user' >> $HOME/.bashrc
+    
+RUN echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> $HOME/.bashrc
 
 ### extra configurations needed per distro variant
 COPY ./src/ubuntu/install/extra $INST_SCRIPTS/extra/
