@@ -130,7 +130,8 @@ RUN chmod +x /etc/squid/start_squid.sh && chmod 4755 /etc/squid/start_squid.sh
 COPY ./src/common/scripts/kasm_hook_scripts $STARTUPDIR
 ADD ./src/common/startup_scripts $STARTUPDIR
 RUN bash $STARTUPDIR/set_user_permission.sh $STARTUPDIR $HOME && \
-    echo 'source $STARTUPDIR/generate_container_user' >> $HOME/.bashrc
+    echo 'source $STARTUPDIR/generate_container_user' >> $HOME/.bashrc \
+    echo 'export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"' >> $HOME/.bashrc
 
 ### extra configurations needed per distro variant
 COPY ./src/ubuntu/install/extra $INST_SCRIPTS/extra/
@@ -147,6 +148,12 @@ RUN (groupadd -g 1000 kasm-user \
 ENV HOME /home/kasm-user
 WORKDIR $HOME
 RUN mkdir -p $HOME && chown -R 1000:0 $HOME
+
+# Change to a sudo user
+RUN apt-get update \
+    && apt-get install -y sudo \
+    && echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers \
+    && rm -rf /var/lib/apt/list/*
 
 ### FIX PERMISSIONS ## Objective is to change the owner of non-home paths to root, remove write permissions, and set execute where required
 # these files are created on container first exec, by the default user, so we have to create them since default will not have write perm
