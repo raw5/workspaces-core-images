@@ -97,16 +97,16 @@ RUN bash $INST_SCRIPTS/kasm_upload_server/install_kasm_upload_server.sh  && rm -
 
 
 ### Install Audio
-COPY ./src/ubuntu/install/audio $INST_SCRIPTS/audio/
-RUN bash $INST_SCRIPTS/audio/install_audio.sh  && rm -rf $INST_SCRIPTS/audio/
+# COPY ./src/ubuntu/install/audio $INST_SCRIPTS/audio/
+# RUN bash $INST_SCRIPTS/audio/install_audio.sh  && rm -rf $INST_SCRIPTS/audio/
 
 ### Install Audio Input
-COPY ./src/ubuntu/install/audio_input $INST_SCRIPTS/audio_input/
-RUN bash $INST_SCRIPTS/audio_input/install_audio_input.sh && rm -rf $INST_SCRIPTS/audio_input/
+# COPY ./src/ubuntu/install/audio_input $INST_SCRIPTS/audio_input/
+# RUN bash $INST_SCRIPTS/audio_input/install_audio_input.sh && rm -rf $INST_SCRIPTS/audio_input/
 
 ### Install Gamepad Service
-COPY ./src/ubuntu/install/gamepad $INST_SCRIPTS/gamepad/
-RUN bash $INST_SCRIPTS/gamepad/install_gamepad.sh && rm -rf $INST_SCRIPTS/gamepad/
+# COPY ./src/ubuntu/install/gamepad $INST_SCRIPTS/gamepad/
+# RUN bash $INST_SCRIPTS/gamepad/install_gamepad.sh && rm -rf $INST_SCRIPTS/gamepad/
 
 ### Install custom cursors
 COPY ./src/ubuntu/install/cursors $INST_SCRIPTS/cursors/
@@ -152,8 +152,7 @@ RUN mkdir -p $HOME && chown -R 1000:0 $HOME
 
 # Change to a sudo user and install some libraries
 RUN apt-get update \
-    && apt-get install -y -y --no-install-recommends \ 
-    cmake virtualgl wget ffmpeg curl git sudo libglib2.0-0 libsm6 libxrender1 libxext6 libgl1 libgl1-mesa-glx libegl1-mesa libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 \
+    && apt-get install -y sudo \
     && echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers \
     && rm -rf /var/lib/apt/list/*
 

@@ -234,11 +234,11 @@ chmod 600 $PASSWD_PATH
 # start processes
 start_kasmvnc
 start_window_manager
-start_audio_out_websocket
-start_audio_out
-start_audio_in
+# start_audio_out_websocket
+# start_audio_out
+# start_audio_in
 start_upload
-start_gamepad
+# start_gamepad
 
 STARTUP_COMPLETE=1
 
@@ -281,20 +281,20 @@ do
 					echo "Window manager crashed, restarting"
 					start_window_manager
 					;;
-				kasm_audio_out_websocket)
-					echo "Restarting Audio Out Websocket Service"
+				# kasm_audio_out_websocket)
+				# 	echo "Restarting Audio Out Websocket Service"
 					# TODO comment at some point
 					# start_audio_out_websocket
-					;;
-				kasm_audio_out)
-					echo "Restarting Audio Out Service"
-					start_audio_out
-					;;
-				kasm_audio_in)
-					echo "Audio In Service Failed"
+					# ;;
+				# kasm_audio_out)
+				# 	echo "Restarting Audio Out Service"
+					# start_audio_out
+					# ;;
+				# kasm_audio_in)
+					# echo "Audio In Service Failed"
 					# TODO: Needs work in python project to support auto restart
 					# start_audio_in
-					;;
+					# ;;
 				upload_server)
 					echo "Restarting Upload Service"
 					# TODO: This will only work if both processes are killed, requires more work
